@@ -1,22 +1,74 @@
+---
+// src/layouts/Layout.astro
+interface Props {
+	title: string
+}
+
+const { title } = Astro.props
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-logo.avif"
+		/>
+		<link
+			rel="preload"
+			href="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-portada.avif"
+			as="image"
+		/>
+		<link
+			rel="preload"
+			href="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-roblox.avif"
+			as="image"
+		/>
+		<link
+			rel="preload"
+			href="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-logo.avif"
+			as="image"
+		/>
+		<title>{title}</title>
+		<meta
+			name="description"
+			content="Tienda de armas y colecciones de Murder Mystery 2 (MM2)"
+		/>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta
+			property="og:description"
+			content="Tienda de armas y colecciones de Murder Mystery 2 (MM2)"
+		/>
+
+		<meta
+			name="keywords"
+			content="MM2, Murder Mystery 2, godlys, tienda MM2, comprar godlys, Robux, objetos raros MM2, tienda Roblox, MM2 godly shop, Compaditaar, MM2 store, armas MM2, knives MM2, mm2 godlys baratos"
+		/>
+
+		<meta
+			property="og:image"
+			content="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-portada.avif"
+		/>
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta
+			property="twitter:description"
+			content="Tienda de armas y colecciones de Murder Mystery 2 (MM2)"
+		/>
+		<meta
+			property="twitter:image"
+			content="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-portada.avif"
+		/>
 	</head>
-	<body>
+	<body class="bg-gray-900 text-white">
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

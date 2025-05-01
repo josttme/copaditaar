@@ -1,0 +1,33 @@
+---
+// src/components/CategorySection.astro
+import type { Product, Category } from '@/types/intex'
+import ProductCard from '@components/ProductCard.astro'
+
+interface Props {
+	title: string
+	products: Product[]
+	category: Category
+}
+
+const { title, products, category } = Astro.props
+const filteredProducts = products.filter((p) => p.category === category)
+
+// No mostrar sección si no hay productos
+if (filteredProducts.length === 0) return null
+---
+
+<section id={category + 's'} class="bg-gray-900 py-12">
+	<div class="container mx-auto px-4">
+		<h2
+			class="mb-8 border-b border-amber-400 pb-2 text-3xl font-bold text-white"
+		>
+			{title}
+		</h2>
+
+		<div
+			class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+		>
+			{filteredProducts.map((product) => <ProductCard product={product} />)}
+		</div>
+	</div>
+</section>

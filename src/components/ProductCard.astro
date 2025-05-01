@@ -1,0 +1,96 @@
+---
+// src/components/ProductCard.astro
+// Componente para mostrar productos individuales o combos
+// Muestra información del producto: imagen, nombre, precio y stock
+// En caso de combos, muestra dos productos con sus respectivas imágenes
+
+import type { Product } from '@/types/intex'
+import { formatPrice } from '@/utils/formatters'
+
+interface Props {
+	product: Product
+}
+
+const { product } = Astro.props
+const isCombo = product.category === 'combo'
+---
+
+<div
+	class={`bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col saturate-[1.2]  ${isCombo ? 'md:col-span-1' : ''}`}
+>
+	<!-- Contenedor de imágenes adaptable para productos individuales o combos -->
+	<div class={`relative ${isCombo ? 'flex flex-col md:flex-row' : ''}`}>
+		<!-- Primera imagen (producto principal) -->
+		<div class={`${isCombo ? 'flex-1' : ''} relative pt-[100%]`}>
+			<img
+				src={product.image}
+				alt={product.name}
+				class="absolute inset-0 h-full w-full object-contain p-4"
+				loading="lazy"
+			/>
+		</div>
+
+		<!-- Segunda imagen (solo para combos) -->
+		{
+			isCombo && product.image_product_2 && (
+				<div class="relative flex-1 pt-[100%]">
+					<img
+						src={product.image_product_2}
+						alt={product.name_product_2 || 'Segundo producto'}
+						class="absolute inset-0 h-full w-full object-contain p-4"
+						loading="lazy"
+					/>
+				</div>
+			)
+		}
+	</div>
+
+	<!-- Información del producto -->
+	<div
+		class="flex flex-grow flex-col bg-gradient-to-b from-gray-800 to-gray-900 p-5"
+	>
+		<!-- Badge de combo -->
+		{
+			isCombo && (
+				<span class="mb-2 self-start rounded bg-amber-500 px-2 py-1 text-xs font-bold text-gray-900 uppercase">
+					Combo
+				</span>
+			)
+		}
+
+		<!-- Nombre del producto principal -->
+		<h3 class="mb-2 line-clamp-2 text-xl font-bold text-white">
+			{product.name}
+		</h3>
+
+		<!-- Nombre del segundo producto (solo para combos) -->
+		{
+			isCombo && product.name_product_2 && (
+				<div class="mt-1 mb-3">
+					<h4 class="text-lg font-medium text-gray-300">
+						<span class="mr-1 text-amber-400">+</span>
+						{product.name_product_2}
+					</h4>
+				</div>
+			)
+		}
+
+		<!-- Precio y stock -->
+		<div class="mt-auto flex flex-col items-center justify-between pt-3">
+			<span class="self-start text-2xl font-bold text-amber-400"
+				>{formatPrice(product.price)}</span
+			>
+			<span
+				class={`px-3 py-1 rounded-full text-sm self-end font-medium ${
+					product.stock > 5
+						? 'bg-green-600 text-white'
+						: product.stock > 0
+							? 'bg-yellow-500 text-gray-900'
+							: 'bg-red-600 text-white'
+				}`}
+			>
+				{product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}
+			</span>
+		</div>
+	</div>
+</div>

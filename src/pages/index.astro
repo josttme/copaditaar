@@ -1,11 +1,62 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import type { Product } from '../types/intex'
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Hero from '../components/Hero.astro'
+import CategorySection from '../components/CategorySection.astro'
+import Footer from '../components/Footer.astro'
+import LoadingSpinner from '../components/LoadingSpinner.astro'
+import ErrorMessage from '../components/ErrorMessage.astro'
+import { getAllProducts } from '../lib/api'
+import '../styles/global.css'
+// Estado para manejar la carga y errores
+let isLoading = true
+let error = null
+let products: Product[] = []
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+try {
+	// Obtener todos los productos
+	products = await getAllProducts()
+	isLoading = false
+} catch (e) {
+	error = e
+	isLoading = false
+	console.error('Error al cargar productos:', e)
+}
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="CompaditaAR MM2 Shop">
+	<Navbar />
+	<Hero />
+
+	<main class="min-h-screen bg-gray-800 text-white">
+		{isLoading && <LoadingSpinner />}
+
+		{error && <ErrorMessage />}
+
+		{
+			!isLoading && !error && (
+				<>
+					<CategorySection title="Guns" products={products} category="gun" />
+
+					<CategorySection
+						title="Knives"
+						products={products}
+						category="knife"
+					/>
+
+					<CategorySection title="Sets" products={products} category="set" />
+
+					<CategorySection
+						title="Combos"
+						products={products}
+						category="combo"
+					/>
+				</>
+			)
+		}
+	</main>
+
+	<Footer />
 </Layout>

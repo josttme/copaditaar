@@ -1,0 +1,30 @@
+---
+// src/components/Hero.astro
+---
+
+<section class="relative h-[70vh] w-full pt-16 md:h-[80vh]">
+	<div class="absolute inset-0 h-full w-full bg-[#feea9a] pt-14 pb-10">
+		<img
+			src="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-portada.avif"
+			alt="MM2 Shop Hero"
+			class="hidden h-full w-full object-contain md:block"
+		/>
+		<img
+			src="https://pub-9513482a8d2244f8a941d4a5c7471c50.r2.dev/copaditaar-roblox.avif"
+			alt="Avatar Roblox de Copaditaar"
+			class="h-full w-full object-contain md:hidden"
+		/>
+		<div
+			class="absolute inset-0 flex items-center justify-center bg-black/50 md:bg-black/5"
+		>
+			<div class="px-4 text-center text-white md:hidden">
+				<h2 class="mb-4 text-4xl font-bold md:text-6xl">
+					CompaditaAR MM2 Shop
+				</h2>
+				<p class="mx-auto max-w-2xl text-xl md:text-2xl">
+					Encuentra las mejores armas y colecciones
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
