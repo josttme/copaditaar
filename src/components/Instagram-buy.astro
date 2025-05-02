@@ -1,0 +1,48 @@
+---
+import Instagram from 'public/icons/instagram.svg'
+---
+
+<!-- En tu layout principal -->
+<div class="floating-instagram rounded">
+	<a
+		href="https://www.instagram.com/copaditaar"
+		class="grid rounded-full p-3"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<Instagram
+			name="instagram"
+			class="size-8 stroke-white stroke-1 md:size-9"
+			aria-hidden="true"
+		/>
+	</a>
+</div>
+
+<style>
+	.floating-instagram {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		z-index: 999;
+	}
+
+	.floating-instagram a {
+		background: linear-gradient(
+			45deg,
+			#f09433 0%,
+			#e6683c 25%,
+			#dc2743 50%,
+			#cc2366 75%,
+			#bc1888 100%
+		);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		transition:
+			transform 0.3s,
+			box-shadow 0.3s;
+	}
+
+	.floating-instagram a:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+	}
+</style>
