@@ -10,7 +10,9 @@ interface Props {
 }
 
 const { title, products, category } = Astro.props
-const filteredProducts = products.filter((p) => p.category === category)
+const filteredProducts = products
+	.filter((p) => p.category === category)
+	.sort((a, b) => b.price - a.price)
 
 // No mostrar sección si no hay productos
 if (filteredProducts.length === 0) return null
